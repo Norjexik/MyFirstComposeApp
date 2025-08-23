@@ -1,24 +1,34 @@
-/build/
-/app/build/
+# Gradle files
 .gradle/
-gradle/
-gradlew
-gradlew.bat
-*.apk
-*.apks
-*.aab
-*.iml
+build/
+
+# Local configuration file (sdk path, etc)
 local.properties
+
+# Log/OS Files
+*.log
+
+# Android Studio generated files and folders
+captures/
 .externalNativeBuild/
 .cxx/
-.DS_Store
-Thumbs.db
-desktop.ini
-$RECYCLE.BIN/
-*.log
-*.tmp
-*~
-nohup.out
-.AppleDouble
-.LSOverride
+*.aab
+*.apk
+output-metadata.json
+
+# IntelliJ
+*.iml
 .idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Android Profiling
+*.hprof
