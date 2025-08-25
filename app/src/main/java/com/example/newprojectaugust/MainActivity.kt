@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.newprojectaugust.ui.theme.NewProjectAugustTheme
 
 class MainActivity : ComponentActivity() {
@@ -41,8 +42,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CounterApp() {
-    var count by remember { mutableIntStateOf(0) }
+fun CounterApp(viewModel: CounterViewModel = viewModel()) {
 
     Column(
         modifier = Modifier
@@ -54,14 +54,14 @@ fun CounterApp() {
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(
-            text = "Счёт: $count",
+            text = "Счёт: ${viewModel.count}",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Blue
         )
         Spacer(modifier = Modifier.height(32.dp))
         Button(
-            onClick = { count++ },
+            onClick = { viewModel.increment() },
             colors = ButtonDefaults.buttonColors(contentColor = Color(0xFF0066CC))
         ){
             Text(
@@ -71,7 +71,7 @@ fun CounterApp() {
             )
         }
         Button(
-            onClick = {count = 0},
+            onClick = {viewModel.reset()},
             colors = ButtonDefaults.buttonColors(contentColor = Color.Red)
         ){
             Text(
