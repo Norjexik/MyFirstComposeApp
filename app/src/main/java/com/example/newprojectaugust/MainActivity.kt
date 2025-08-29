@@ -15,6 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -32,10 +33,10 @@ import com.example.newprojectaugust.ui.theme.NewProjectAugustTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        val repository = CounterRepository(context = this)
         setContent {
             NewProjectAugustTheme {
-                CounterApp()
+                CounterApp(viewModel = remember { CounterViewModel(repository) })
             }
         }
     }
@@ -43,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CounterApp(viewModel: CounterViewModel = viewModel()) {
-
+val count by viewModel.count.collectAsState()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -54,7 +55,7 @@ fun CounterApp(viewModel: CounterViewModel = viewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(
-            text = "Счёт: ${viewModel.count}",
+            text = "Счёт: $count",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Blue
